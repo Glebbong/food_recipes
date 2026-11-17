@@ -1,282 +1,353 @@
-/* Базовые настройки */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+  --bg: #efece5;
+  --surface: #ffffff;
+  --surface-2: #f7f5f0;
+  --ink: #16130f;
+  --ink-muted: #6b6459;
+  --line: #e2ddd2;
+  --line-strong: #c9c2b2;
+  --accent: #c73e1d;
+  --accent-dark: #9e2f13;
+  --accent-soft: #fbe9e3;
+  --radius: 6px;
+  --radius-lg: 12px;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
 }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: #f9f7f4; /* Тёплый светлый фон */
-    color: #2d2d2d;
-    line-height: 1.6;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Header ---------- */
+.site-header {
+  background: var(--ink);
+  color: #fff;
+  border-bottom: 3px solid var(--accent);
 }
 
-/* Шапка */
-header {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e0ddd8;
-    padding: 30px 0;
-    margin-bottom: 30px;
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 24px;
 }
 
-header h1 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+
+.brand-mark {
+  display: grid; place-items: center;
+  width: 42px; height: 42px;
+  background: var(--accent); color: #fff;
+  font-family: var(--font-mono); font-weight: 700;
+  font-size: 0.95rem; letter-spacing: 1px;
+  border-radius: var(--radius);
 }
 
-.subtitle {
-    color: #777;
-    margin-top: 5px;
+.brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+.brand-text strong { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.2px; }
+.brand-text span {
+  font-size: 0.72rem; color: #b8b2a8;
+  text-transform: uppercase; letter-spacing: 1.4px; margin-top: 2px;
 }
 
-/* Фильтры */
-.filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #e0ddd8;
-    margin-bottom: 30px;
+.site-nav a {
+  color: #d8d3c8; text-decoration: none;
+  font-size: 0.8rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 1.2px;
+  padding: 8px 14px;
+  border: 1px solid #3a352e; border-radius: var(--radius);
+  transition: all 0.2s;
+}
+.site-nav a:hover { border-color: var(--accent); color: #fff; }
+
+/* ---------- Toolbar ---------- */
+.toolbar {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 22px 22px 16px;
+  margin: 32px 0 28px;
+  box-shadow: 0 1px 0 var(--line-strong);
 }
 
-.filter-group {
-    flex: 1 1 200px;
-    display: flex;
-    flex-direction: column;
+.toolbar-row {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 16px;
 }
 
-.filter-group label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #888;
-    margin-bottom: 5px;
+.field-label {
+  display: block;
+  font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--ink-muted); margin-bottom: 8px;
 }
 
-.filter-group input,
-.filter-group select {
-    padding: 10px 12px;
-    border: 1px solid #d0ccc6;
-    border-radius: 8px;
-    font-size: 1rem;
-    background: #fff;
-    transition: border-color 0.2s;
+.search-wrap input,
+.select-wrap select {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.filter-group input:focus,
-.filter-group select:focus {
-    outline: none;
-    border-color: #4a90e2;
+.search-wrap input:focus,
+.select-wrap select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
-/* Сетка рецептов */
+.select-wrap select {
+  cursor: pointer; appearance: none; padding-right: 36px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%236b6459' stroke-width='1.8' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.toolbar-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+
+.results-count {
+  font-family: var(--font-mono);
+  font-size: 0.82rem; color: var(--ink-muted);
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Grid ---------- */
 .recipes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
 }
 
-/* Карточка рецепта */
+/* ---------- Card ---------- */
 .recipe-card {
-    background: #ffffff;
-    border: 1px solid #e0ddd8;
-    border-radius: 16px;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  display: flex; flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.recipe-card::before {
+  content: "";
+  position: absolute; top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .recipe-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  border-color: var(--line-strong);
+  box-shadow: 0 12px 28px -12px rgba(22,19,15,0.18);
+  transform: translateY(-2px);
 }
+.recipe-card:hover::before { opacity: 1; }
 
 .recipe-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    background-color: #eae6e0;
-    display: block;
+  width: 100%; height: 190px;
+  object-fit: cover; display: block;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
 }
 
 .recipe-content {
-    padding: 20px;
+  padding: 22px 22px 20px;
+  display: flex; flex-direction: column; flex: 1;
 }
 
 .recipe-category {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    background-color: #f0ebe5;
-    color: #7a6e63;
-    margin-bottom: 10px;
+  display: inline-flex; align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.6px;
+  padding: 4px 10px; border-radius: 3px;
+  background: var(--accent-soft); color: var(--accent-dark);
+  margin-bottom: 12px;
 }
 
 .recipe-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 8px;
+  font-size: 1.3rem; font-weight: 700;
+  letter-spacing: -0.3px; line-height: 1.25;
+  margin-bottom: 8px;
 }
 
 .recipe-description {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 15px;
+  font-size: 0.92rem; color: var(--ink-muted);
+  line-height: 1.5; margin-bottom: 16px;
 }
 
-/* Блок КБЖУ */
+/* ---------- Nutrition ---------- */
 .nutrition-block {
-    background: #f7f5f2;
-    border-radius: 10px;
-    padding: 12px 15px;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 16px;
 }
 
 .nutrition-item {
-    text-align: center;
+  padding: 10px 6px; text-align: center;
+  border-right: 1px solid var(--line);
 }
+.nutrition-item:last-child { border-right: none; }
 
 .nutrition-item .value {
-    display: block;
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #2d2d2d;
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 700; font-size: 1rem; color: var(--ink);
 }
-
 .nutrition-item .label {
-    font-size: 0.75rem;
-    color: #888;
-    text-transform: uppercase;
+  font-size: 0.66rem; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--ink-muted); margin-top: 2px;
 }
 
-/* Ингредиенты */
-.ingredients-list {
-    margin-bottom: 15px;
-}
+/* ---------- Ingredients ---------- */
+.ingredients-list { margin-bottom: 16px; }
 
 .ingredients-list h4 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #444;
+  font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.6px;
+  color: var(--ink-muted);
+  margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
 }
 
-.ingredients-list ul {
-    list-style: none;
-    font-size: 0.9rem;
-}
+.ingredients-list ul { list-style: none; }
 
 .ingredients-list li {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-    border-bottom: 1px dashed #eee;
+  display: flex; justify-content: space-between; gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 0.87rem;
 }
+.ingredients-list li:last-child { border-bottom: none; }
 
-.ingredients-list li:last-child {
-    border-bottom: none;
-}
-
-.ingredient-name {
-    color: #333;
-}
-
+.ingredient-name { color: var(--ink); font-weight: 500; }
 .ingredient-amount {
-    color: #777;
-    font-weight: 500;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem; text-align: right; white-space: nowrap;
 }
 
-/* Кнопки и ссылки */
+/* ---------- Video ---------- */
 .video-link {
-    display: inline-block;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    color: #4a90e2;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
+  display: inline-flex; align-items: center; gap: 6px;
+  align-self: flex-start; margin-bottom: 16px;
+  padding: 8px 14px;
+  font-size: 0.78rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.2px;
+  text-decoration: none;
+  color: #fff; background: var(--ink);
+  border-radius: var(--radius);
+  transition: background 0.2s;
 }
+.video-link:hover { background: var(--accent); }
 
-.video-link:hover {
-    text-decoration: underline;
-}
-
-/* Комментарии */
+/* ---------- Comments ---------- */
 .comments-section {
-    border-top: 1px solid #e0ddd8;
-    padding-top: 15px;
-    margin-top: 5px;
+  margin-top: auto; padding-top: 16px;
+  border-top: 1px solid var(--line);
 }
 
 .comments-section h4 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #444;
+  font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.6px;
+  color: var(--ink-muted); margin-bottom: 10px;
 }
 
 .comment-input {
-    width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #d0ccc6;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-    resize: vertical;
-    min-height: 60px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  margin-bottom: 10px;
+  resize: vertical; min-height: 60px;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
 }
-
 .comment-input:focus {
-    outline: none;
-    border-color: #4a90e2;
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  background: #fff;
 }
 
 .comment-list {
-    list-style: none;
-    font-size: 0.85rem;
-    color: #555;
+  list-style: none;
+  display: flex; flex-direction: column; gap: 6px;
 }
-
 .comment-list li {
-    background: #f7f5f2;
-    padding: 6px 10px;
-    border-radius: 6px;
-    margin-bottom: 5px;
+  background: var(--accent-soft); color: var(--accent-dark);
+  padding: 7px 11px; border-radius: var(--radius);
+  font-size: 0.83rem;
+  border-left: 3px solid var(--accent);
+}
+.comment-list:empty::after {
+  content: "Заметок пока нет — добавьте первую";
+  display: block;
+  font-size: 0.76rem; color: var(--ink-muted);
+  font-style: italic; padding: 4px 0;
 }
 
-/* Подвал */
-footer {
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 40px;
-    border-top: 1px solid #e0ddd8;
-    color: #999;
-    font-size: 0.85rem;
+/* ---------- Empty state ---------- */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center; padding: 60px 20px;
+  color: var(--ink-muted);
+  background: var(--surface);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+}
+.empty-state strong {
+  display: block; font-size: 1.1rem;
+  color: var(--ink); margin-bottom: 6px;
 }
 
-/* Адаптив */
-@media (max-width: 600px) {
-    .recipes-grid {
-        grid-template-columns: 1fr;
-    }
-    .filters {
-        flex-direction: column;
-    }
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  padding: 24px 0;
+  text-align: center;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .toolbar-row { grid-template-columns: 1fr; }
+  .recipes-grid { grid-template-columns: 1fr; }
+  .header-inner { padding: 14px 20px; }
+  .brand-text strong { font-size: 1rem; }
+  .brand-text span { display: none; }
+  .site-nav a { padding: 6px 10px; font-size: 0.72rem; }
 }
