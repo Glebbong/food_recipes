@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Recipes — простые рецепты</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🍳 Food Recipes</h1>
+            <p class="subtitle">Простые рецепты с КБЖУ и видео</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Фильтры -->
+        <section class="filters">
+            <div class="filter-group">
+                <label for="search-name">Поиск по названию</label>
+                <input type="text" id="search-name" placeholder="Например, яичница...">
+            </div>
+            <div class="filter-group">
+                <label for="search-ingredient">Поиск по ингредиенту</label>
+                <input type="text" id="search-ingredient" placeholder="Например, тунец...">
+            </div>
+            <div class="filter-group">
+                <label for="filter-category">Категория</label>
+                <select id="filter-category">
+                    <option value="all">Все</option>
+                    <option value="завтрак">Завтрак</option>
+                    <option value="обед">Обед</option>
+                    <option value="ужин">Ужин</option>
+                    <option value="перекус">Перекус</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Список рецептов -->
+        <section id="recipes-list" class="recipes-grid">
+            <!-- Сюда будут вставляться карточки через JS -->
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Food Recipes. Сделано с ❤️ для GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
