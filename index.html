@@ -1,55 +1,68 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Recipes — простые рецепты</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Recipes — рецепты с КБЖУ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>🍳 Food Recipes</h1>
-            <p class="subtitle">Простые рецепты с КБЖУ и видео</p>
-        </div>
-    </header>
 
-    <main class="container">
-        <!-- Фильтры -->
-        <section class="filters">
-            <div class="filter-group">
-                <label for="search-name">Поиск по названию</label>
-                <input type="text" id="search-name" placeholder="Например, яичница...">
-            </div>
-            <div class="filter-group">
-                <label for="search-ingredient">Поиск по ингредиенту</label>
-                <input type="text" id="search-ingredient" placeholder="Например, тунец...">
-            </div>
-            <div class="filter-group">
-                <label for="filter-category">Категория</label>
-                <select id="filter-category">
-                    <option value="all">Все</option>
-                    <option value="завтрак">Завтрак</option>
-                    <option value="обед">Обед</option>
-                    <option value="ужин">Ужин</option>
-                    <option value="перекус">Перекус</option>
-                </select>
-            </div>
-        </section>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#" class="brand">
+      <span class="brand-mark">FR</span>
+      <span class="brand-text">
+        <strong>Food Recipes</strong>
+        <span>Рецепты · КБЖУ · Видео</span>
+      </span>
+    </a>
+    <nav class="site-nav">
+      <a href="#recipes-list">Рецепты</a>
+    </nav>
+  </div>
+</header>
 
-        <!-- Список рецептов -->
-        <section id="recipes-list" class="recipes-grid">
-            <!-- Сюда будут вставляться карточки через JS -->
-        </section>
-    </main>
+<main class="container">
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Food Recipes. Сделано с ❤️ для GitHub Pages.</p>
-        </div>
-    </footer>
+  <section class="toolbar">
+    <div class="toolbar-row">
+      <div class="search-wrap">
+        <label for="search-input" class="field-label">Поиск</label>
+        <input type="search" id="search-input"
+               placeholder="Название блюда или ингредиент — например: яичница, тунец"
+               autocomplete="off">
+      </div>
+      <div class="select-wrap">
+        <label for="filter-category" class="field-label">Категория</label>
+        <select id="filter-category">
+          <option value="all">Все категории</option>
+          <option value="завтрак">Завтрак</option>
+          <option value="обед">Обед</option>
+          <option value="ужин">Ужин</option>
+          <option value="перекус">Перекус</option>
+        </select>
+      </div>
+    </div>
+    <div class="toolbar-meta">
+      <span id="results-count" class="results-count">Найдено: 0 рецептов</span>
+    </div>
+  </section>
 
-    <script src="data.js"></script>
-    <script src="script.js"></script>
+  <section id="recipes-list" class="recipes-grid"></section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2026 Food Recipes · GitHub Pages</p>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
